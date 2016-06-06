@@ -1,0 +1,13 @@
+version: '2'
+services:
+  reporter:
+    build:
+      context: .
+      args:
+        - run_at=50\t23\t*\t*\t*\t
+    environment:
+      - SLACK_ACCESS_TOKEN=$SLACK_ACCESS_TOKEN
+      - SLACK_TARGET_CHANNELS=$SLACK_TARGET_CHANNELS
+      - ESA_ACCESS_TOKEN=$ESA_ACCESS_TOKEN
+      - ESA_CURRENT_TEAM=$ESA_CURRENT_TEAM
+      - ESA_REPORT_CATEGORY=$ESA_REPORT_CATEGORY
