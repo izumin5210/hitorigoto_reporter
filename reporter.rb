@@ -4,8 +4,6 @@ Bundler.require
 require 'date'
 require_relative 'hitorigoto'
 
-Dotenv.load
-
 SLACK_ACCESS_TOKEN    = ENV['SLACK_ACCESS_TOKEN']
 SLACK_TARGET_CHANNELS = ENV['SLACK_TARGET_CHANNELS']
 ESA_ACCESS_TOKEN      = ENV['ESA_ACCESS_TOKEN']

@@ -2,6 +2,4 @@
 .gitignore
 .bundle
 vendor/bundle
-.env
-.env.sample
 README.md
