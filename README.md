@@ -13,16 +13,22 @@ And then run this app:
 $ ruby reporter.rb
 ```
 
-
-## Configure
-Add your configuration to `.env` file in the root of your project:
+Or when you use docker:
 
 ```
-SLACK_ACCESS_TOKEN="your-slack-access-token"
-SLACK_TARGET_CHANNELS="hitorigoto-syaro;hitorigoto-cocoa;hitorigoto-chino;hitorigoto-rize;hitorigoto-chiya"
-ESA_ACCESS_TOKEN="your-esa-access-token"
-ESA_CURRENT_TEAM="your-esa-team"
-ESA_REPORT_CATEGORY="日報/%Y/%m/%d"
+$ docker-compose up
+```
+
+
+## Configure
+Add your configuration to enviromnent variables:
+
+```
+export SLACK_ACCESS_TOKEN="your-slack-access-token"
+export SLACK_TARGET_CHANNELS="hitorigoto-syaro;hitorigoto-cocoa;hitorigoto-chino;hitorigoto-rize;hitorigoto-chiya"
+export ESA_ACCESS_TOKEN="your-esa-access-token"
+export ESA_CURRENT_TEAM="your-esa-team"
+export ESA_REPORT_CATEGORY="日報/%Y/%m/%d"
 ```
 
 ## LICENSE
