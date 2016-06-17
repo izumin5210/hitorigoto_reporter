@@ -15,13 +15,16 @@ Slack.configure do |config|
 end
 
 SLACK_TARGET_CHANNELS.split(';').each do |channel_name|
-  body_md = Hitorigoto.fetch(channel_name)
-    .reverse
-    .map { |h| "- [#{h.created_at.strftime('%T')}](#{h.permalink}): #{h.text}" }
-    .join("\n")
+  hitorigoto_list = Hitorigoto.fetch(channel_name)
+  unless hitorigoto_list.empty?
+    body_md
+      .reverse
+      .map { |h| "- [#{h.created_at.strftime('%T')}](#{h.permalink}): #{h.text}" }
+      .join("\n")
 
-  category = Date.today.strftime(ESA_REPORT_CATEGORY)
+    category = Date.today.strftime(ESA_REPORT_CATEGORY)
 
-  client = Esa::Client.new(access_token: ESA_ACCESS_TOKEN, current_team: ESA_CURRENT_TEAM)
-  client.create_post(name: channel_name, body_md: body_md, category: category, wip: false)
+    client = Esa::Client.new(access_token: ESA_ACCESS_TOKEN, current_team: ESA_CURRENT_TEAM)
+    client.create_post(name: channel_name, body_md: body_md, category: category, wip: false)
+  end
 end
