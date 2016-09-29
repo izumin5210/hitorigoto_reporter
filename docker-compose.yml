@@ -4,7 +4,7 @@ services:
     build:
       context: .
       args:
-        - run_at=05\t00\t*\t*\t*\t
+        - run_at=0\t2\t*\t*\t*\t
     environment:
       - SLACK_ACCESS_TOKEN=$SLACK_ACCESS_TOKEN
       - SLACK_TARGET_CHANNELS=$SLACK_TARGET_CHANNELS
