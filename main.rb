@@ -1,12 +1,7 @@
 require 'bundler'
 Bundler.require
 
-require 'date'
-require 'uri'
-require 'logger'
-require_relative 'reporter'
-require_relative 'hitorigoto'
-require_relative 'config'
+require_relative 'lib/hitorigoto_reporter'
 
 HitorigotoReporter.configure do |config|
   config.slack_access_token    = ENV['SLACK_ACCESS_TOKEN']
@@ -16,4 +11,4 @@ HitorigotoReporter.configure do |config|
   config.esa_report_category   = ENV['ESA_REPORT_CATEGORY']
 end
 
-Reporter.new.report(Date.today - 4)
+HitorigotoReporter::Reporter.new.report(Date.today - 4)
