@@ -18,7 +18,7 @@ RUN apk add --update --virtual build-dependencies \
         tzdata \
     && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
     && printenv | sed 's/^\(.*\)$/export \1/g' | grep -e "GEM" -e "BUNDLE" >> /root/.profile \
-    && echo -e "$run_at . /root/.profile; cd $(pwd); $(which ruby) reporter.rb" >> /var/spool/cron/crontabs/root
+    && echo -e "$run_at . /root/.profile; cd $(pwd); $(which ruby) main.rb" >> /var/spool/cron/crontabs/root
 
 COPY Gemfile .
 COPY Gemfile.lock .
