@@ -1,14 +1,11 @@
 class Reporter
-  attr_reader :date, :channel
+  def report(date)
+    target_channels.each do |channel|
+      hitorigoto_list = Hitorigoto.fetch(channel, date)
+      report = hitorigoto_list.empty? ? nil : to_markdown(hitorigoto_list)
 
-  def initialize(date:, channel:)
-    @date = date
-    @channel = channel
-  end
-
-  def generate
-    hitorigoto_list = Hitorigoto.fetch(@channel, @date)
-    hitorigoto_list.empty? ? nil : to_markdown(hitorigoto_list)
+      post_report(channel: channel, report: report, date: date) unless report.nil?
+    end
   end
 
   private
@@ -49,5 +46,31 @@ class Reporter
       end
       replaced
     end
+  end
+
+  def post_report(channel:, report:, date:, wip: false)
+    category = report_category(date)
+    client.create_post(name: channel, body_md: report, category: category, wip: false)
+    logger.debug("Posted #{category}/#{channel} to #{config.esa_current_team}.esa.io")
+  end
+
+  def config
+    HitorigotoReporter.configuration
+  end
+
+  def target_channels
+    config.slack_target_channels.split(config.slack_target_channels_delimiter)
+  end
+
+  def client
+    Esa::Client.new(access_token: config.esa_access_token, current_team: config.esa_current_team)
+  end
+
+  def report_category(date)
+    date.strftime(config.esa_report_category)
+  end
+
+  def logger
+    config.logger
   end
 end
