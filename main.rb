@@ -11,4 +11,4 @@ HitorigotoReporter.configure do |config|
   config.esa_report_category   = ENV['ESA_REPORT_CATEGORY']
 end
 
-HitorigotoReporter::Reporter.new.report(Date.today - 4)
+HitorigotoReporter::Reporter.new.report(Date.today - 1)
