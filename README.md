@@ -10,7 +10,7 @@ $ bundle install
 And then run this app:
 
 ```
-$ ruby reporter.rb
+$ ruby main.rb
 ```
 
 Or when you use docker:
