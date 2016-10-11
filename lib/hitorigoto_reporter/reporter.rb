@@ -16,7 +16,7 @@ module HitorigotoReporter
 
     def post_report(channel:, report:, date:, wip: false)
       category = report_category(date)
-      client.create_post(name: channel, body_md: report, category: category, wip: false)
+      client.create_post(name: channel, body_md: report, category: category, wip: false, user: config.esa_user)
       logger.debug("Posted #{category}/#{channel} to #{config.esa_current_team}.esa.io")
     end
 

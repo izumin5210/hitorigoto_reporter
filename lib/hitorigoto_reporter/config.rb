@@ -10,7 +10,7 @@ module HitorigotoReporter
   class Config
     attr_accessor :logger,
       :slack_access_token, :slack_target_channels, :slack_target_channels_delimiter,
-      :esa_access_token, :esa_current_team, :esa_report_category
+      :esa_access_token, :esa_current_team, :esa_report_category, :esa_user
 
     def self.configure(&block)
       @config = Config::Builder.new(&block).build
@@ -23,6 +23,7 @@ module HitorigotoReporter
     def initialize
       @logger = Logger.new(STDOUT)
       @slack_target_channels_delimiter = ";"
+      @esa_user = "esa_bot"
     end
 
     class Builder
