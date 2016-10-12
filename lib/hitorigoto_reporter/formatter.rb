@@ -19,7 +19,8 @@ module HitorigotoReporter
 
     def stamps
       filtered_list, file_comments = filter_list_and_extract_comments
-      filtered_list.map{ |h| h.stamps }.flatten.uniq
+      s = Proc.new{ |h| h.stamps }
+      filtered_list.flat_map(&s).uniq
     end
 
     private
