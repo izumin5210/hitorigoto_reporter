@@ -1,12 +1,13 @@
 module HitorigotoReporter
   class Hitorigoto
-    attr_reader :username, :text, :permalink, :created_at
+    attr_reader :username, :text, :permalink, :created_at, :stamps
 
-    def initialize(json)
+    def initialize(json, stamps)
       @username   = json['username']
       @text       = json['text']
       @permalink  = json['permalink']
       @created_at = Time.at(json['ts'].to_f)
+      @stamps     = stamps
     end
 
     def self.fetch(channel_name, target_date)
@@ -15,7 +16,11 @@ module HitorigotoReporter
       res = Slack.client.search_messages(query: query)
       res['messages']['matches']
         .select { |m| m['type'] == 'message' }
-        .map { |m| Hitorigoto.new(m) }
+        .map { |m|
+          reaction = Slack.client.reactions_get(channel: m['channel']['id'], timestamp: m['ts'])
+          stamps = reaction['message']['reactions'].map{ |r| r['name'] }
+          Hitorigoto.new(m, stamps) 
+        }
     end
   end
 end
