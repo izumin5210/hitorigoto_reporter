@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-gem "slack-api"
-gem "esa"
+# Specify your gem's dependencies in hitorigoto_reporter.gemspec
+gemspec
