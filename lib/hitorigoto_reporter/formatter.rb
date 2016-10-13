@@ -17,6 +17,11 @@ module HitorigotoReporter
         .join("\n\n\n")
     end
 
+    def stamps
+      filtered_list, file_comments = filter_list_and_extract_comments
+      filtered_list.flat_map(&:stamps).uniq
+    end
+
     private
 
     def filter_list_and_extract_comments

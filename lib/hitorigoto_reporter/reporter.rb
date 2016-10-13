@@ -7,16 +7,16 @@ module HitorigotoReporter
         if formatter.empty?
           logger.debug("#{channel} has no hitorigoto on #{date.strftime("%Y-%m-%d")}")
         else
-          post_report(channel: channel, report: formatter.to_markdown, date: date) 
+          post_report(channel: channel, report: formatter.to_markdown, date: date, tags: formatter.stamps)
         end
       end
     end
 
     private
 
-    def post_report(channel:, report:, date:, wip: false)
+    def post_report(channel:, report:, date:, wip: false, tags:)
       category = report_category(date)
-      client.create_post(name: channel, body_md: report, category: category, wip: false, user: config.esa_user)
+      client.create_post(name: channel, body_md: report, category: category, wip: false, user: config.esa_user, tags: tags)
       logger.debug("Posted #{category}/#{channel} to #{config.esa_current_team}.esa.io")
     end
 
