@@ -2,7 +2,7 @@ module HitorigotoReporter
   class Hitorigoto
     attr_reader :username, :text, :permalink, :created_at, :stamps
 
-    def initialize(json, stamps)
+    def initialize(json, stamps = [])
       @username   = json['username']
       @text       = json['text']
       @permalink  = json['permalink']
@@ -18,7 +18,7 @@ module HitorigotoReporter
         .select { |m| m['type'] == 'message' }
         .map { |m|
           reaction = Slack.client.reactions_get(channel: m['channel']['id'], timestamp: m['ts'])
-          stamps = reaction['message']['reactions'].map{ |r| r['name'] }
+          stamps = (reaction['message']['reactions'] || []).map { |r| r['name'] }
           Hitorigoto.new(m, stamps) 
         }
     end
