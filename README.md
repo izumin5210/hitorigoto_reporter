@@ -1,5 +1,4 @@
 # Hitorigoto Reporter
-Summarize slack posts into esa.io
 
 ## Usage
 Execute:

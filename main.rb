@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler.require
 
-require 'hitorigoto_reporter'
+require_relative 'lib/hitorigoto_reporter'
 
 HitorigotoReporter.configure do |config|
   config.slack_access_token    = ENV['SLACK_ACCESS_TOKEN']
