@@ -1,5 +1,5 @@
 PATH
-  remote: .
+  remote: ../
   specs:
     hitorigoto_reporter (3.0.0)
       esa (~> 1.5)
@@ -8,7 +8,6 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    diff-lcs (1.2.5)
     esa (1.7.0)
       faraday (~> 0.9)
       faraday_middleware
@@ -26,20 +25,6 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    rake (10.5.0)
-    rspec (3.5.0)
-      rspec-core (~> 3.5.0)
-      rspec-expectations (~> 3.5.0)
-      rspec-mocks (~> 3.5.0)
-    rspec-core (3.5.4)
-      rspec-support (~> 3.5.0)
-    rspec-expectations (3.5.0)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.5.0)
-    rspec-mocks (3.5.0)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.5.0)
-    rspec-support (3.5.0)
     slack-api (1.2.4)
       faraday (>= 0.7, < 0.10)
       faraday_middleware (~> 0.8)
@@ -53,10 +38,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.12)
   hitorigoto_reporter!
-  rake (~> 10.0)
-  rspec (~> 3.0)
 
 BUNDLED WITH
    1.12.5

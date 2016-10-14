@@ -2,4 +2,7 @@
 .gitignore
 .bundle
 vendor/bundle
+sample/.gitignore
+sample/.bundle
+sample/vendor/bundle
 README.md
