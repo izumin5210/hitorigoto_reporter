@@ -4,6 +4,7 @@ MAINTAINER izumin5210 <masayuki@izumin.info>
 
 ENV PROJECT /project
 ENV APP $PROJECT/app
+ENV PROFILE /root/.profile
 RUN mkdir -p $APP
 WORKDIR $PROJECT
 
@@ -18,8 +19,7 @@ RUN apk add --update --virtual build-dependencies \
         openssl \
         tzdata \
     && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
-    && printenv | sed 's/^\(.*\)$/export \1/g' | grep -e "GEM" -e "BUNDLE" >> /root/.profile \
-    && echo -e "$run_at . /root/.profile; cd $APP; $(which ruby) main.rb" >> /var/spool/cron/crontabs/root
+    && printenv | sed 's/^\(.*\)$/export \1/g' | grep -e "GEM" -e "BUNDLE" >> $PROFILE
 
 RUN mkdir -p lib/hitorigoto_reporter
 COPY Gemfile .
@@ -37,5 +37,7 @@ RUN bundle install -j4 \
 
 COPY lib ../lib
 COPY sample .
+
+RUN echo -e "$run_at . $PROFILE; cd $APP; $(which ruby) main.rb" >> /var/spool/cron/crontabs/root
 
 CMD ["crond", "-l", "2", "-f"]
