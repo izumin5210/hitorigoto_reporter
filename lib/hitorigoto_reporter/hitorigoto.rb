@@ -22,7 +22,7 @@ module HitorigotoReporter
       def fetch_all(query:)
         list = []
         loop.with_index(1) do |_, i|
-          res = Slack.client.search_messages(query: query, page: i)
+          res = Slack.client.search_messages(query: query, page: i, count: 100)
           list += extract_higorigoto_list_from_res(res)
           break if complete?(res)
         end
